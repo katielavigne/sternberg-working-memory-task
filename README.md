@@ -1,6 +1,6 @@
 # Sternberg Working Memory Task
 
-##### tags: `working memory, verbal, sternberg, load, delay, fmri, eeg`
+##### tags: `working memory, verbal working memory, sternberg, load, delay, fmri, eeg`
 
 Sternberg working memory tasks including two memory loads and a delay suitable for fMRI & EEG or offline administration.
 
