@@ -1,0 +1,172 @@
+output_port oport = output_port_manager.get_port( 1 );
+
+# note: only encode and probe stimuli and responses are sending out port codes.
+
+### create output text file for keeping track of event timing
+output_file ofile1 = new output_file;
+string ofileName = "eventTiming_wm_"+logfile.subject();
+ofile1.open( ofileName, false ); # don't overwrite
+ofile1.print( "Time(ms)\tCondition\tEvent Code\n" );
+
+###########################################################################################
+################################# variables ###############################################
+string encode_string;
+string probestring;
+string encodeCondition;
+string probeCondition;
+int responseCode;
+string accCode;
+int syncTime = 0;
+int encodeTime;
+int probeTime;
+int responseTime;
+int rt;
+int resp_ct;
+int corrButton;
+int stimIndex;
+int yesButton = 1; # refers to button number of active response buttons (not the button codes)
+int noButton = 2;
+
+###########################################################################################
+################################# constants ###############################################
+
+##################################################################################################
+
+array<string>consonants[20]={"B","C","D","F","G","H","J","K","L","M","N","P","Q","R","S","T","V","W","X","Z"};
+
+array<int>countarray[20]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+array<int>probe_yes_countarray4[4]={1,2,3,4};
+array<int>probe_yes_countarray6[6]={1,2,3,4,5,6};
+array<int>probe_no_countarray[14]={7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+
+array<int>trial_array[40][3]={ # sets WM load (4 or 6 letters), delay (4 sec), ITI duration (2,4,6, or 12 sec)
+
+{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000}, # 8+4 trials with 4 sec delay & 2 sec ITI
+{4,4000,2000},{4,4000,2000},{4,4000,2000},{4,4000,2000},
+{4,4000,4000},{4,4000,4000},{4,4000,4000},{4,4000,4000},												 				 # 4 trials with 4 sec delay & 4 sec ITI
+{4,4000,6000},{4,4000,6000},
+{4,4000,12000},{4,4000,12000},
+
+{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000}, 
+{6,4000,2000},{6,4000,2000},{6,4000,2000},{6,4000,2000},
+{6,4000,4000},{6,4000,4000},{6,4000,4000},{6,4000,4000},												 	
+{6,4000,6000},{6,4000,6000},
+{6,4000,12000},{6,4000,12000}
+};
+
+trial_array.shuffle(); # randomly shuffles the 40 rows (40 trials)
+	
+instructions_trial.present();
+#start_trial.present(); # waits for the code from the scanner
+int waitstart = clock.time();
+loop int waitcount = 0 until waitcount >= 100 begin
+	waitcount = clock.time() - waitcount;
+end;
+
+sync_event.set_port_code(1);
+loop int syncloop = 1 until syncloop == 6 begin
+	sync_trial.present();
+	stimulus_data syncOn = stimulus_manager.last_stimulus_data();
+	syncTime = syncOn.time();
+	ofile1.print( string(syncTime)+"\t"+"sync_eeg"+"\t"+"1"+"\n" );
+	syncloop = syncloop+1;
+end;
+
+countdown_trial.present();
+
+loop int trl=1 until trl> 40 begin 
+	
+	# set the duration of the delay period and of the ITI
+	int delayjitter=random(0,1000);
+	int itijitter=random(0,1000);
+	int delaydurn=trial_array[trl][2]+delayjitter;
+	#int itidurn=trial_array[trl][3]+itijitter;
+	int itidurn=random(1500,2500);
+	delay_event.set_duration(delaydurn);
+	delay_event.set_event_code("delay"+string(delaydurn));
+	probe_event.set_deltat(delaydurn);
+	iti_event.set_duration(itidurn);
+	iti_event.set_event_code("iti"+string(itidurn));
+	#iti_event.set_port_code(itidurn/1000);
+	
+	# set the letter string for encode and the letter for the probe
+	int probe_yesvsno=random(0,1); # 1 if probe was in encode string, 0 if it wasn't
+	#probe_event.set_port_code(10+probe_yesvsno);
+	probe_event.set_port_code(1);
+	
+	countarray.shuffle();
+	int numletters=trial_array[trl][1];
+	if(trial_array[trl][1]==4)then
+		encode_string="#"+consonants[countarray[1]]+consonants[countarray[2]]+consonants[countarray[3]]+consonants[countarray[4]]+"#";
+		encodeCondition = "encode4";
+	elseif(trial_array[trl][1]==6)then
+		encode_string=consonants[countarray[1]]+consonants[countarray[2]]+consonants[countarray[3]]+consonants[countarray[4]]+consonants[countarray[5]]+consonants[countarray[6]];
+		encodeCondition = "encode6";
+	end;
+	encode_txt.set_caption(encode_string);
+	encode_txt.redraw();
+	encode_event.set_event_code(encode_string);
+	encode_event.set_port_code(1);
+	
+	probe_yes_countarray4.shuffle();
+	probe_yes_countarray6.shuffle();
+	probe_no_countarray.shuffle();
+	if(probe_yesvsno==1)then	
+		if(trial_array[trl][1]==6)then # wmload=6
+			probestring=consonants[countarray[probe_yes_countarray6[1]]]; # pick a num between 1 and 6 (e.g. 5) then take the 5th number in count array, then get the corresponding letter from the consonants array
+			probeCondition = "probe6yes";
+		elseif(trial_array[trl][1]==4)then
+			probestring=consonants[countarray[probe_yes_countarray4[1]]]; # pick a num between 1 and 4 (e.g. 2) then take the 2nd number in count array, then get the corresponding letter from the consonants array
+			probeCondition = "probe4yes";
+		end;
+		corrButton = yesButton;		
+	elseif(probe_yesvsno==0)then		
+		probestring=consonants[countarray[probe_no_countarray[1]]];  # pick a num between 7 and 20 (e.g. 15) then take the 15th number in count array, then get the corresponding letter from the consonants array	
+		if(trial_array[trl][1]==6)then # wmload=6
+			probeCondition = "probe6no";
+		elseif(trial_array[trl][1]==4)then
+			probeCondition = "probe4no";
+		end; 
+		corrButton = noButton;
+	end;
+	probe_txt.set_caption(probestring);
+	probe_txt.redraw();
+	probe_event.set_event_code(probestring);
+		
+	#wm_trial.present();
+	encode_trial.present();
+	probe_trial.present();
+	trl=trl+1;
+
+	# set codes to be used in output file
+	stimIndex = stimulus_manager.stimulus_count();
+	stimulus_data encode = stimulus_manager.get_stimulus_data(stimIndex-3);
+	stimulus_data probe = stimulus_manager.get_stimulus_data(stimIndex-1);
+	response_data responsedata = response_manager.last_response_data();
+	encodeTime = encode.time();
+	probeTime = probe.time();
+	if response_manager.total_response_count() == resp_ct then
+		responseCode = 0;
+		responseTime = 0;
+	else
+		resp_ct = response_manager.total_response_count();
+		responseCode = responsedata.button();
+		responseTime = responsedata.time();
+		rt = probe.reaction_time();
+		if rt < 4000 then
+			if corrButton == responseCode then
+				accCode = "correct";
+			elseif corrButton != responseCode then
+				accCode = "incorrect";
+			end;
+		end;
+	end;
+
+	# print data to file
+	ofile1.print( string(encodeTime)+"\t"+encodeCondition+"\t"+encode_string+"\n" );
+	ofile1.print( string(probeTime)+"\t"+probeCondition+"\t"+probestring+"\n" );
+	if responseCode != 0 then
+		ofile1.print( string(responseTime)+"\t"+accCode+"\t"+string(responseCode)+"\n" );
+	end;
+end;
+end_trial.present();
