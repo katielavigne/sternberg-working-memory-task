@@ -1,0 +1,223 @@
+{
+    "title": "Sternberg Working Memory Task",
+    "description": "Sternberg working memory tasks including two memory loads and a delay suitable for fMRI & EEG or offline administration.",
+    "identifier": {
+        "identifier": "https://doi.org/10.17605/OSF.IO/6CTSJ",
+        "identifierSource": "DOI"
+    },
+    "creators": [
+        {
+	      "fullName": "Todd Woodward",
+	      "firstName": "Todd",
+	      "lastName": "Woodward",
+	      "affiliations":
+      	[
+        		{
+          			"name": "University of British Columbia"
+		      }
+		]
+	  }
+    ],
+    "types": [
+        {
+		"information":
+		{
+	            "value": [
+                    "fMRI",
+                    "EEG"
+                ]
+		}
+        }
+    ],
+    "dates": [
+		{
+			"type": {
+				"value":[ 
+                    "Date created",
+                    "Last updated"
+            ]
+			},
+			"date": [
+                "2022-12-09 12:13 PM",
+                "2022-12-18 10:06 AM"
+            ]
+		}
+	],
+    "distributions": [
+	        {
+			"formats": "NBS Presentation",
+			"size" : 59,
+		        "unit" : {
+            			"value": "KB"
+		        },
+			"access": {
+				"landingPage": "https://osf.io/6ctsj/",
+				"authorizations": [
+					{
+						"value": "public"
+					}
+				]
+			}
+		}
+	],
+	"acknowledges": [
+    		{
+      		"name": [
+                "Jennifer Whitman",
+                "Christine Tipper",
+                "Katie Lavigne",
+                "Nicole Sanford"
+            ],
+      		"funders": [
+        			{
+			          "name": "none",
+          				"abbreviation": ""
+        			}
+		      ]
+    		}
+     ],
+	"keywords": [
+		{
+			"value" : "verbal working memory"
+		},
+		{
+			"value" : "load"
+		},
+		{
+			"value" : "delay"
+		}
+	],
+    "version": "1.0",
+    "privacy": "open",
+    "isAbout": [
+        {
+            "identifier": {
+                "identifier": "https://www.ncbi.nlm.nih.gov/taxonomy/9606",
+				"identifierSource": "NCBI Taxonomy Database"
+            },
+            "name":"Homo sapiens"
+        },
+		{
+			"name":"adult"
+		}
+    ],
+    "licenses": [
+        {
+            "name": "GNU General Public License (GPL) 3.0"
+        }
+    ],
+    "primaryPublications": [
+        {
+            "title": "Publication title",
+            "publicationVenue": "Journal name",
+            "authorsList": "Author 1, Author 2, et al.",
+            "dates": [
+				{
+					"type": {
+						"value":"publication date"
+					},
+					"date": "1818-01-01 00:00:00"
+				}
+			]
+	}
+    ],
+    "extraProperties": [
+        {
+            "category": "subjects",
+            "values": [
+                {
+                    "value": "0"
+                }
+            ]
+        },
+	  {
+            "category": "function_assessed",
+            "values": [
+                {
+                    "value": "working memory"
+                }
+            ]
+        },
+
+		{
+			"category": "contact",
+			"values": [
+				{
+					"value": "katie.lavigne@mcgill.ca"
+				}
+			]
+		},
+		{
+			"category": "files",
+			"values": [
+				{
+					"value": "9"
+				}
+			]
+		},
+		{
+			"category": "CONP_status",
+			"values": [
+				{
+					"value": "Canadian"
+				}
+			]
+		},
+		{
+			"category": "origin_consortium",
+			"values": [
+				{
+					"value": "none"
+				}
+			]
+		},
+           {
+			"category": "origin_institution",
+			"values": [
+			   	{
+					"value": "University of British Columbia"
+				}
+			]
+		},
+		{
+			"category": "origin_city",
+			"values": [
+				{
+					"value": "Vancouver"
+				}
+			]
+		},
+		{
+			"category": "origin_province",
+			"values": [
+				{
+					"value": "British Columbia"
+				}
+			]
+		},
+		{
+			"category": "origin_country",
+			"values": [
+				{
+					"value": "Canada"
+				}
+			]
+		},
+		{
+			"category": "logo",
+			"values": [
+				{
+					"value": "WMscreenshot.png"
+				}
+			]
+		},
+		{
+		      "category": "REB_statement",
+ 		      "values": [
+      		  {
+          			"value": "Ethics-related information goes here."
+    			  }
+      		]
+    		}
+    ]
+}
