@@ -1,48 +1,34 @@
 # Sternberg Working Memory Task
 
-##### tags: `working memory, verbal working memory, sternberg, load, delay, fmri, eeg`
+Sternberg working memory tasks including two memory loads and a delay suitable for fMRI, EEG, or behavioural administration.
 
-Sternberg working memory tasks including two memory loads and a delay suitable for fMRI & EEG or offline administration.
+**Publication:** Task-merging for finer separation of functional brain networks in working memory
 
-<p align="center">
-<img src = "https://github.com/katielavigne/sternberg-working-memory-task/blob/main/WMscreenshot.bmp" width="30%" height="30%"/>
-</p>
+**Experiment DOI:** https://doi.org/10.17605/OSF.IO/6CTSJ
 
-**Publications:** n/a but see previous versions of task (with minor modifications) in the following:
-
-Sanford & Woodward (2021) Functional Delineation of Prefrontal Networks Underlying Working Memory in Schizophrenia: A Cross-data-set Examination. *J Cogn Neurosci, 33*(9), 1880–1908. doi: [https://doi.org/10.1162/jocn_a_01726](https://doi.org/10.1162/jocn_a_01726)
-
-Sanford, Whitman, & Woodward (2020) Task-merging for finer separation of functional brain networks in working memory. Cortex, 125*, 246-271. doi: [https://doi.org/10.1016/j.cortex.2019.12.014](https://doi.org/10.1016/j.cortex.2019.12.014)
-
-**Function(s) assessed:** (verbal) working memory
+**Functions assessed:** Cognitive
 
 ## Features
-- [x] Repeatability
-- [ ] Multilingual
-- [ ] Validated
-- [x] Accessibility
-- [x] Cross-platform
-- [ ] Cross-device
-- [ ] Cross-species
 
-**Alternate Forms:** randomized stimuli
+**Languages:** English
 
-**Languages:** English (instructions only, rest of task accessible for any language using Latin script)
+**Validation:**
+  * Measures: 
+  * Populations: Adult, Healthy, Disease
 
-**Validation:** not available
+**Accessibility:** Colour-blindness, Hearing impairment
 
-**Accessibility:** colourblind-friendly
+**Modalities:** fMRI, EEG, Behavioural
 
-**Platforms:** fMRI, EEG, offline
+**Devices:** Computer, Laptop
 
-**Devices:** PC
-
-**Species:** human
+**Species:** Homo sapiens
 
 ## Development
-**Software:** NBS Presentation (version 17)
 
-**Requirements:** two-button response device
+**Software:** NBS Presentation version 17
+
+**Requirements:** 2-button response box or mouse/keyboard required
 
 ## Administration
 
@@ -61,6 +47,21 @@ Log files are output to calculate event timing.
 - number of correct responses
 - reaction time
 
-## Contributors
+## License and Attribution
 
-Jen Whitman, Nicole Sanford, Katie Lavigne, Todd Woodward
+**License**
+
+This project is distributed under two distinct licenses:
+
+Source Code: The source code of this project is distributed under the Academic Public License. This license allows for academic use and modification of the code but is not intended for commercial use.
+
+Documentation: The documentation of this project, including but not limited to README files, wikis, and help files, is distributed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0). This license allows others to remix, adapt, and build upon our work non-commercially, as long as they credit the author and license their new creations under the identical terms.
+
+Please read the LICENSE_code and LICENSE_doc files for the specific terms of these licenses.
+
+**Attribution**
+
+If you use this task in your work, please cite it as indicated on the Open Science Framework, e.g., (in APA format): 
+
+Woodward, T., Lavigne, K. M., & Whitman, J. C. (2024, August 1). Sternberg Working Memory Task. https://doi.org/10.17605/OSF.IO/6CTSJ
+
